@@ -1,6 +1,5 @@
 package com.cs.artfactonline.system.exception;
 
-import com.cs.artfactonline.artifact.ArtifactNotFoundException;
 import com.cs.artfactonline.system.Result;
 import com.cs.artfactonline.system.StatusCode;
 import org.springframework.http.HttpStatus;
@@ -18,18 +17,17 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 
-    @ExceptionHandler(ArtifactNotFoundException.class) //tell spring that this exception is an exception handler
-    @ResponseStatus(HttpStatus.NOT_FOUND)//ceci appartient à l'entête
-    Result handleArtifactNotFoundException(ArtifactNotFoundException exception)
+    //tell spring that this exception is an exception handler
+    //ceci appartient à l'entête
+    //tell spring that this exception is an exception handler
+    @ExceptionHandler({ObjectNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    Result handleObjectFoundException(ObjectNotFoundException exception)
     {
         return new Result(false, StatusCode.NOT_FOUND,exception.getMessage());
     }
 
     /*
-
-
-    I
-
     return new Result ( flag: false, StatusCode. INVALID_ARGUMENT, message:
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -46,6 +44,5 @@ public class ExceptionHandlerAdvice {
 
             return new Result(false,StatusCode.INVALID_ARGUMENT,"Provided Arguments are invalid, see data for details. ", map);
     }
-
 
 }

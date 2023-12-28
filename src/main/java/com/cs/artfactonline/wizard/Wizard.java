@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Wizard {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
 
@@ -55,5 +55,11 @@ public class Wizard {
 
     public Integer getNumberOfArtifacts() {
         return this.getArtifacts().size();
+    }
+
+    public void removeAllArtifacts()
+    {
+        this.artifacts.stream().forEach(artifact->artifact.setOwner(null));
+        this.artifacts = null;
     }
 }
