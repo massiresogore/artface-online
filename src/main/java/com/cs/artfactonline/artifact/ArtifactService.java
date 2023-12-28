@@ -1,6 +1,7 @@
 package com.cs.artfactonline.artifact;
 
 import com.cs.artfactonline.artifact.utils.IdWorker;
+import com.cs.artfactonline.system.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class ArtifactService {
 
         return artifactRepository
                 .findById(artifactId)
-                .orElseThrow(()->new ArtifactNotFoundException(artifactId));
+                .orElseThrow(()->new ObjectNotFoundException("",artifactId));
     }
 
 
@@ -48,14 +49,14 @@ public class ArtifactService {
                             oldArtifact.setImageUrl(update.getImageUrl());
                             return this.artifactRepository.save(oldArtifact);
                         })
-                        .orElseThrow(()->new ArtifactNotFoundException(artifactId));
+                        .orElseThrow(()->new ObjectNotFoundException(update.getName(),artifactId));
     }
 
     public void delete(String artifactId)
     {
         //artifact exist or not
         this.artifactRepository.findById(artifactId)
-               .orElseThrow(()->new ArtifactNotFoundException(artifactId));
+               .orElseThrow(()->new ObjectNotFoundException("update",artifactId));
        this.artifactRepository.deleteById(artifactId);
     }
 
