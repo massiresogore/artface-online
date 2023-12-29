@@ -1,5 +1,7 @@
 package com.cs.artfactonline.wizard;
 
+import com.cs.artfactonline.artifact.Artifact;
+import com.cs.artfactonline.artifact.ArtifactRepository;
 import com.cs.artfactonline.system.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.List;
 public class WizardService {
 
     public WizardRepository wizardRepository;
+    public ArtifactRepository artifactRepository;
 
-    public WizardService(WizardRepository wizardRepository) {
+    public WizardService(WizardRepository wizardRepository, ArtifactRepository artifactRepository) {
         this.wizardRepository = wizardRepository;
+        this.artifactRepository = artifactRepository;
     }
 
     public List<Wizard> findAll()
@@ -49,6 +53,30 @@ public class WizardService {
                 })
                 .orElseThrow(()->new ObjectNotFoundException("",i));
     }
+
+    public void assignArtifact(Integer wizardId, String artifactId)
+    {
+        //Find artifact by id From DB
+        Artifact artifactTobeAssigned = this.artifactRepository.findById(artifactId).orElseThrow(
+                () -> new ObjectNotFoundException("artifact", artifactId)
+        );
+
+        //Find wizard by id from DB
+        Wizard wizard = this.wizardRepository.findById(wizardId).orElseThrow(
+                () -> new ObjectNotFoundException("wizard", wizardId)
+        );
+
+
+        //Artifact assignment
+            //We need to see if the artifact is already owned by some wizard
+            if(artifactTobeAssigned.getOwner() != null){
+                artifactTobeAssigned.getOwner().removeArtifact(artifactTobeAssigned);
+            }
+        wizard.addArtifact(artifactTobeAssigned);
+
+    }
+
+
 
 
 }
