@@ -62,4 +62,10 @@ public class Wizard {
         this.artifacts.stream().forEach(artifact->artifact.setOwner(null));
         this.artifacts = null;
     }
+
+    public void removeArtifact(Artifact artifactTobeAssigned) {
+        //remove artifact owner
+        artifactTobeAssigned.setOwner(null);
+        this.artifacts.remove(artifactTobeAssigned);
+    }
 }
