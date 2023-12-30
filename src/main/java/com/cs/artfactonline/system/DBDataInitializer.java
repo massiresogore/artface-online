@@ -2,6 +2,8 @@ package com.cs.artfactonline.system;
 
 import com.cs.artfactonline.artifact.Artifact;
 import com.cs.artfactonline.artifact.ArtifactRepository;
+import com.cs.artfactonline.hogwartuser.HogwartUser;
+import com.cs.artfactonline.hogwartuser.UserRepository;
 import com.cs.artfactonline.wizard.Wizard;
 import com.cs.artfactonline.wizard.WizardRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Component;
 public class DBDataInitializer implements CommandLineRunner {
     private final ArtifactRepository artifactRepository;
     private final WizardRepository wizardRepository;
+    private final UserRepository userRepository;
 
-    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository) {
+    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserRepository userRepository) {
         this.artifactRepository = artifactRepository;
         this.wizardRepository = wizardRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -86,5 +90,31 @@ public class DBDataInitializer implements CommandLineRunner {
         wizardRepository.save(w3);
 
         artifactRepository.save(a6);
+
+        //Create the newest users
+        HogwartUser user1 = new HogwartUser();
+        user1.setUsername("Massire");
+        user1.setEnable(true);
+        user1.setPassword("massire");
+        user1.setRoles("admin user");
+
+        HogwartUser user2 = new HogwartUser();
+        user2.setUsername("BingYang");
+        user2.setPassword("bingyang");
+        user2.setEnable(true);
+        user2.setRoles("user");
+
+        HogwartUser user3 = new HogwartUser();
+        user3.setUsername("Binta");
+        user3.setPassword("binta");
+        user3.setEnable(false);
+        user3.setRoles("user");
+
+        //save Users
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+
     }
 }
