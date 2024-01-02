@@ -87,10 +87,10 @@ public class ExceptionHandlerAdvice {
 
 
     /*Fallback gère toutes les exception non gérées*/
-   /* @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     Result handleOtherException(Exception exception) {
         return new Result(false, StatusCode.INTERNAL_SERVER_ERROR,"A server internal error occurs", exception.getMessage());
-    }*/
+    }
 
 }
