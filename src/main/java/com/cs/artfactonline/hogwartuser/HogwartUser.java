@@ -71,4 +71,7 @@ public class HogwartUser implements Serializable {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+    public boolean isEnabled() {
+        return this.enable;
+    }
 }

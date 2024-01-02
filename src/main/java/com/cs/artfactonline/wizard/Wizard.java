@@ -2,6 +2,8 @@ package com.cs.artfactonline.wizard;
 
 import com.cs.artfactonline.artifact.Artifact;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,9 @@ public class Wizard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @NotEmpty(message = "name is required.")
+    @NonNull
     private String name;
 
     //one wizard are many artifact,
