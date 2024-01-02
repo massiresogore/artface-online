@@ -8,3 +8,13 @@ Merci pour votre question. L'injection de constructeur est favorisée par rappor
 1. Dépendances explicites : les dépendances requises sont clairement décrites. Cela garantit qu'aucune dépendance n'est négligée lors des tests ou lorsque l'objet est instancié dans des conditions différentes.
 2. Dépendances immuables : en permettant aux dépendances d'être déclarées comme finales, l'injection de constructeur améliore la robustesse et la sécurité des threads.
 3. Dépendance simplifié : aucune réflexion Java n'est nécessaire pour établir des dépendances.
+
+ <plugin> ceci pour eviter le problème d'intégration de test pour la convertion  du jsonOject en string token
+                <!--                Prevent test cases errors during Maven building in CI-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
+                </configuration>
+</plugin> 
