@@ -3,7 +3,7 @@ package com.cs.artfactonline.system;
 import com.cs.artfactonline.artifact.Artifact;
 import com.cs.artfactonline.artifact.ArtifactRepository;
 import com.cs.artfactonline.hogwartuser.HogwartUser;
-import com.cs.artfactonline.hogwartuser.UserRepository;
+import com.cs.artfactonline.hogwartuser.UserService;
 import com.cs.artfactonline.wizard.Wizard;
 import com.cs.artfactonline.wizard.WizardRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -13,12 +13,11 @@ import org.springframework.stereotype.Component;
 public class DBDataInitializer implements CommandLineRunner {
     private final ArtifactRepository artifactRepository;
     private final WizardRepository wizardRepository;
-    private final UserRepository userRepository;
-
-    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserRepository userRepository) {
+    private final UserService userService;//Parce que le userservice code le mdp
+    public DBDataInitializer(ArtifactRepository artifactRepository, WizardRepository wizardRepository, UserService userService) {
         this.artifactRepository = artifactRepository;
         this.wizardRepository = wizardRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -93,27 +92,27 @@ public class DBDataInitializer implements CommandLineRunner {
 
         //Create the newest users
         HogwartUser user1 = new HogwartUser();
-        user1.setUsername("Massire");
+        user1.setUsername("massire");
         user1.setEnable(true);
-        user1.setPassword("massire");
+        user1.setPassword("123456");
         user1.setRoles("admin user");
 
         HogwartUser user2 = new HogwartUser();
         user2.setUsername("BingYang");
-        user2.setPassword("bingyang");
+        user2.setPassword("123456");
         user2.setEnable(true);
         user2.setRoles("user");
 
         HogwartUser user3 = new HogwartUser();
         user3.setUsername("Binta");
-        user3.setPassword("binta");
-        user3.setEnable(false);
+        user3.setPassword("123456");
+        user3.setEnable(false);//Désactive le compte
         user3.setRoles("user");
 
         //save Users
-        userRepository.save(user1);
-        userRepository.save(user2);
-        userRepository.save(user3);
+        userService.save(user1);
+        userService.save(user2);
+        userService.save(user3);
 
 
     }

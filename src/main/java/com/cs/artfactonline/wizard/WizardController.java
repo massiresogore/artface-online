@@ -36,7 +36,7 @@ public class WizardController {
     }
 
     @PostMapping
-    public Result addWizard(@RequestBody WizardDto wizardDto)
+    public Result addWizard(@Valid @RequestBody WizardDto wizardDto)
     {
        Wizard savedWizard = this.wizardService.save(Objects.requireNonNull(this.wizardDtoToWizardConverter.convert(wizardDto)));
 
@@ -63,8 +63,6 @@ public class WizardController {
         WizardDto updatedWizard = this.wizartToWizardDtoConverter.convert(savedWizard);
 
         return new Result(true,StatusCode.SUCCESS,"Update wizard success",updatedWizard);
-
-
 
     }
 

@@ -26,8 +26,9 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@AutoConfigureMockMvc(addFilters = false)//ceci desactive la sécurite filter de spring
 @SpringBootTest
-@AutoConfigureMockMvc
+//@AutoConfigureMockMvc
 class UserControllerTest {
 
     @Autowired
