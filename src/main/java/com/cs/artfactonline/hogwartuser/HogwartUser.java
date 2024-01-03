@@ -15,6 +15,8 @@ public class HogwartUser implements Serializable {
     private String username;
     @NotEmpty(message = "password is required")
     private String password;
+
+    @Column(name = "enabled")
     private Boolean enable;
     @NotEmpty(message = "roles ares required")
     private String roles; //Space separete string
