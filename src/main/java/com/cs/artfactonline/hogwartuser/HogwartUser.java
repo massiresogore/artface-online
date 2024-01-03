@@ -1,14 +1,12 @@
 package com.cs.artfactonline.hogwartuser;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 
 @Entity
+@Table(name = "hogwarts_user")
 public class HogwartUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
