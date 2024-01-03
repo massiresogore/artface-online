@@ -7,9 +7,11 @@ import com.cs.artfactonline.hogwartuser.UserService;
 import com.cs.artfactonline.wizard.Wizard;
 import com.cs.artfactonline.wizard.WizardRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component // spring will pick it up this class, and initialize it as a bean
+@Profile("dev")
 public class DBDataInitializer implements CommandLineRunner {
     private final ArtifactRepository artifactRepository;
     private final WizardRepository wizardRepository;
