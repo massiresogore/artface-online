@@ -7,7 +7,7 @@ spring:
             endpoint: ${AZURE_KEY_VAULT_ENDPOINT}
   datasource:
     url: ${datasource-url}
-    username: ${datasource-username}
+    username: ${datassource-username}
     password: ${datasource-password}
   jpa:
     hibernate:
